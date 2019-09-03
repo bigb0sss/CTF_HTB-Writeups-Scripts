@@ -1,3 +1,3 @@
 # hackthebox
 
-All my write-ups are coming soon!
+All my writeups are coming soon!
