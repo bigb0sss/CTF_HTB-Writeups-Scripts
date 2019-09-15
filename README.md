@@ -1,6 +1,9 @@
 # hackthebox
 
 ### hacktheboxes
+| Web Challenge | Difficulty | |
+| :--- | :---: | :--- |
+| Luke | Medium | [Write-up](https://medium.com/@daniel.min.pentest/htb-luke-write-up-77aa52320250) |
 
 ### challenges
 | Web Challenge | Difficulty | |
