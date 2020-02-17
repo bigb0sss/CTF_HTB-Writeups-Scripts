@@ -1,6 +1,6 @@
 # hackthebox
 
-### hacktheboxes
+### boxes
 | Machines | Difficulty | |
 | :--- | :---: | :--- |
 | Luke | Medium | [Write-up](https://medium.com/@bigb0ss/htb-luke-write-up-77aa52320250) |
