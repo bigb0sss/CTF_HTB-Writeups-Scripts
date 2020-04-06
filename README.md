@@ -9,6 +9,7 @@
 | Zetta | Hard | [Read](https://medium.com/@bigb0ss/htb-zetta-write-up-be2fff5e2305) | |
 | Scavenger | Hard | [Read](https://medium.com/@bigb0ss/htb-scavenger-write-up-fee11d971774) | Whois SQLi, Rootkit, Exim SMTP 4.8.9 Exploit |
 | Postman | Easy | [Read](https://medium.com/@bigb0ss/htb-postman-write-up-34bc4fe5daa) | Redis Service Abuse, Webmin CVE 2019-12840 |
+| Registry | Hard | [Read](https://medium.com/@bigb0ss/htb-registry-write-up-b4255bd78712) | Docker Registry API, Restic backups |
 
 ### challenges
 | Web Challenge | Difficulty | |
