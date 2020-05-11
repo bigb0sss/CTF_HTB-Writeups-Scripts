@@ -11,6 +11,7 @@
 | Postman | Easy | [Read](https://medium.com/@bigb0ss/htb-postman-write-up-34bc4fe5daa) | Redis Service Abuse, Webmin CVE 2019-12840 |
 | Registry | Hard | [Read](https://medium.com/@bigb0ss/htb-registry-write-up-b4255bd78712) | Docker Registry API, Restic backups |
 | Mango | Medium | [Read](https://medium.com/@bigb0ss/htb-mango-write-up-52fdd7e67cc6) | NoSQL Injection, SUID Abuse (GTFobins) |
+| Obscurity | Medium | [Read](https://medium.com/@bigb0ss/htb-obscurity-write-up-bc65f61cd255) | Python Web Server |
 
 ### challenges
 | Web Challenge | Difficulty | |
