@@ -12,6 +12,7 @@
 | Registry | Hard | [Read](https://medium.com/@bigb0ss/htb-registry-write-up-b4255bd78712) | Docker Registry API, Restic backups |
 | Mango | Medium | [Read](https://medium.com/@bigb0ss/htb-mango-write-up-52fdd7e67cc6) | NoSQL Injection, SUID Abuse (GTFobins) |
 | Obscurity | Medium | [Read](https://medium.com/@bigb0ss/htb-obscurity-write-up-bc65f61cd255) | Python Web Server |
+| Forest | Easy | [Read](https://medium.com/@bigb0ss/htb-forest-write-up-fdd45e8e73bf) | AS-REP Roasting, Exchange AD Exploitation |
 
 ### challenges
 | Web Challenge | Difficulty | |
