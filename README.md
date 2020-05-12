@@ -17,4 +17,4 @@
 ### challenges
 | Web Challenge | Difficulty | |
 | :--- | :---: | :--- |
-| Emdee Five for Life | Easy | [Write-up](https://medium.com/@bigb0ss/htb-web-challenge-emdee-five-for-life-56cb0ddfd63f) |
+| Emdee Five for Life | Easy | [Write-up](https://medium.com/@bigb0ss/htb-web-challenge-emdee-five-for-life-56cb0ddfd63f) | 
