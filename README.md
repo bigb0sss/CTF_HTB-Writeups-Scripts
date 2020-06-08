@@ -1,6 +1,9 @@
-# hackthebox
+# bigb0ss Write-ups/Blogs
+Links to all my write-ups. Enjoy! 🙂
 
-### boxes
+## hackthebox
+
+#### boxes
 | Machines | Difficulty | Write-up | Vulnerabilities |
 | :--- | :---: | :--- | :-- |
 | Luke | Medium | [Read](https://medium.com/@bigb0ss/htb-luke-write-up-77aa52320250) | |
@@ -14,13 +17,13 @@
 | Obscurity | Medium | [Read](https://medium.com/@bigb0ss/htb-obscurity-write-up-bc65f61cd255) | Python Web Server |
 | Forest | Easy | [Read](https://medium.com/@bigb0ss/htb-forest-write-up-fdd45e8e73bf) | AS-REP Roasting, Exchange AD Exploitation |
 
-### challenges
+#### challenges
 | Web Challenge | Difficulty | |
 | :--- | :---: | :--- |
 | Emdee Five for Life | Easy | [Write-up](https://medium.com/@bigb0ss/htb-web-challenge-emdee-five-for-life-56cb0ddfd63f) | 
 <br />
 
-# Protostar ([Exploit Exercise](http://exploit-exercises.lains.space/protostar/))
+## Protostar ([Exploit Exercise](http://exploit-exercises.lains.space/protostar/))
 |Module |Link   |Note  |
 | :---  | :---  | :--- |
 |Stack0 |[Stack BOF Intro](https://medium.com/@bigb0ss/expdev-exploit-exercise-protostar-stack0-214e8cbccb04)   |Basic buffer overflow abusing gets() function | 
