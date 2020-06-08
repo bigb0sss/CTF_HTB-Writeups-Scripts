@@ -20,7 +20,7 @@
 | Emdee Five for Life | Easy | [Write-up](https://medium.com/@bigb0ss/htb-web-challenge-emdee-five-for-life-56cb0ddfd63f) | 
 <br />
 
-# Protostar ([Exploit Exercise](http://exploit-exercises.lains.space/protostar/))
+# Protostar Walkthrough ([Exploit Exercise](http://exploit-exercises.lains.space/protostar/))
 |Module |Link   |Note  |
 | :---  | :---  | :--- |
 |Stack0 |[Stack BOF Intro](https://medium.com/@bigb0ss/expdev-exploit-exercise-protostar-stack0-214e8cbccb04)   |Basic buffer overflow abusing gets() function | 
