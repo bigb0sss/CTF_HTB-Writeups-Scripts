@@ -1,6 +1,6 @@
 # hackthebox
 
-#### boxes
+### boxes
 | Machines | Difficulty | Write-up | Vulnerabilities |
 | :--- | :---: | :--- | :-- |
 | Luke | Medium | [Read](https://medium.com/@bigb0ss/htb-luke-write-up-77aa52320250) | |
@@ -14,7 +14,7 @@
 | Obscurity | Medium | [Read](https://medium.com/@bigb0ss/htb-obscurity-write-up-bc65f61cd255) | Python Web Server |
 | Forest | Easy | [Read](https://medium.com/@bigb0ss/htb-forest-write-up-fdd45e8e73bf) | AS-REP Roasting, Exchange AD Exploitation |
 
-#### challenges
+### challenges
 | Web Challenge | Difficulty | |
 | :--- | :---: | :--- |
 | Emdee Five for Life | Easy | [Write-up](https://medium.com/@bigb0ss/htb-web-challenge-emdee-five-for-life-56cb0ddfd63f) | 
