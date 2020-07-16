@@ -39,6 +39,7 @@
 <br>
 
 # Vulnserver
-|Series |Command |Vulnerability | Note |
-| :---  | :---  | :--- | :--- |
-|Part 1 | N/A | N/A | Lab Setup |
+|Series |Link |Command |Vulnerability | Note |
+| :---  | :---  | :--- | :--- | :--- |
+|Part 1 |[Read](https://medium.com/@bigb0ss/expdev-vulnserver-part-1-ba35b9e36478) | N/A | N/A | Lab Setup |
+|Part 2 |[Read](https://medium.com/@bigb0ss/expdev-vulnserver-part-2-46de4dd7bdde) | TRUN | EIP Overwrite | 
