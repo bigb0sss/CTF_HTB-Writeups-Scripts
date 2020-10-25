@@ -13,6 +13,7 @@
 | Mango | Medium | [Read](https://medium.com/@bigb0ss/htb-mango-write-up-52fdd7e67cc6) | NoSQL Injection, SUID Abuse (GTFobins) |
 | Obscurity | Medium | [Read](https://medium.com/@bigb0ss/htb-obscurity-write-up-bc65f61cd255) | Python Web Server |
 | Forest | Easy | [Read](https://medium.com/@bigb0ss/htb-forest-write-up-fdd45e8e73bf) | AS-REP Roasting, Exchange AD Exploitation |
+| Blunder | Easy | [Read](https://bigb0sss.github.io/posts/htb-blunder-writeup/) | Bludit CMS Exploit, Sudo Bypass |
 
 ### challenges
 | Web Challenge | Difficulty | |
