@@ -14,6 +14,13 @@
 | Obscurity | Medium | [Read](https://medium.com/@bigb0ss/htb-obscurity-write-up-bc65f61cd255) | Python Web Server |
 | Forest | Easy | [Read](https://medium.com/@bigb0ss/htb-forest-write-up-fdd45e8e73bf) | AS-REP Roasting, Exchange AD Exploitation |
 | Blunder | Easy | [Read](https://bigb0sss.github.io/posts/htb-blunder-writeup/) | Bludit CMS Exploit, Sudo Bypass |
+| Cache | Medium | [Read](https://bigb0sss.github.io/posts/htb-cache-writeup/) | OpenEMR, SQLi, Memcached, Doker |
+| Mischief | Insane | [Read](https://bigb0sss.github.io/posts/htb-mischief-writeup/) | SNMP, IPv6, ICMP Info Leak, Systemd-run |
+| Tabby | Easy | [Read](https://bigb0sss.github.io/posts/htb-tabby-writeup/) | LFI, Tomcat, zip2john, LXD, Container |
+| Valentine | Easy | [Read](https://bigb0sss.github.io/posts/htb-valentine-writeup/) | OpenSSL, Heartbleed, Tmux |
+| Bounty | Easy | [Read](https://bigb0sss.github.io/posts/htb-bounty-writeup/) | Web.config RCE, Juicy Potato |
+| Frolic | Easy | [Read](https://bigb0sss.github.io/posts/htb-frolic-writeup/) | Frackzip, playSMS RCE, ret2libc |
+
 
 ### challenges
 | Web Challenge | Difficulty | |
