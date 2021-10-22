@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 
-# WIP!!!!!
-
 import requests
 
 def login(url, url_login):
