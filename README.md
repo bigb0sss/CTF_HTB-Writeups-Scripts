@@ -1,5 +1,9 @@
-# hackthebox
+# CTF / Hacking Practice
 
+## [GameofHacks](https://www.gameofhacks.com/)
+
+
+## hackthebox
 ### boxes
 | Machines | Difficulty | Write-up | Vulnerabilities |
 | :--- | :---: | :--- | :-- |
@@ -21,14 +25,13 @@
 | Bounty | Easy | [Read](https://bigb0sss.github.io/posts/htb-bounty-writeup/) | Web.config RCE, Juicy Potato |
 | Frolic | Easy | [Read](https://bigb0sss.github.io/posts/htb-frolic-writeup/) | Frackzip, playSMS RCE, ret2libc |
 
-
 ### challenges
 | Web Challenge | Difficulty | |
 | :--- | :---: | :--- |
 | Emdee Five for Life | Easy | [Write-up](https://medium.com/@bigb0ss/htb-web-challenge-emdee-five-for-life-56cb0ddfd63f) | 
 <br />
 
-# Protostar Walkthrough ([Exploit Exercise](http://exploit-exercises.lains.space/protostar/))
+## Protostar Walkthrough ([Exploit Exercise](http://exploit-exercises.lains.space/protostar/))
 |Module |Link   |Note  |
 | :---  | :---  | :--- |
 |Stack0 |[Stack BOF Intro](https://medium.com/@bigb0ss/expdev-exploit-exercise-protostar-stack0-214e8cbccb04)   |Basic buffer overflow abusing gets() function | 
@@ -46,7 +49,7 @@
 |Format4  |[Format String Exploit: GOT](https://medium.com/@bigb0ss/expdev-exploit-exercise-protostar-format-4-e2907b4716d1) |Format String Exploit overwriting the entry of GOT |
 <br>
 
-# Vulnserver
+## Vulnserver (Binary Exploitation)
 |Series |Link |Command |Vulnerability | Note |
 | :---  | :---  | :--- | :--- | :--- |
 |Part 1 |[Read](https://medium.com/@bigb0ss/expdev-vulnserver-part-1-ba35b9e36478) | N/A | N/A | Lab Setup |
@@ -56,3 +59,7 @@
 |Part 5 |[Read](https://medium.com/@bigb0ss/expdev-vulnserver-part-5-10942c8c4395) | HTER | EIP Overwrite + Restricted Characters + Manual Offset Finding |
 |Part 6 |[Read](https://medium.com/@bigb0ss/expdev-vulnserver-part-6-8c98fcdc9131) | GTER | EIP Overwrite + Socket Reuse Exploit |
 |Part 7 |[Read](https://medium.com/@bigb0ss/expdev-vulnserver-part-7-bfe9fb5fd1e6) | LTER | SEH Overwrite + Restricted Characters + Encoded Payloads |
+
+## Resources
+* https://github.com/roya0045/Pentest-practice (List of practice sites)
+* https://securityscorecard.com/blog/common-web-application-vulnerabilities-explained (41 Web vuln explained)
