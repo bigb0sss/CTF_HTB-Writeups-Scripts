@@ -1,9 +1,11 @@
 # CTF / Hacking Practice
 
-## [GameofHacks](https://www.gameofhacks.com/)
+## [gameofhacks](https://www.gameofhacks.com/)
+* Multiple choice-based source code review
 
+## [hbh](https://hbh.sh/challenges)
 
-## hackthebox
+## [hackthebox](https://app.hackthebox.eu/)
 ### boxes
 | Machines | Difficulty | Write-up | Vulnerabilities |
 | :--- | :---: | :--- | :-- |
