@@ -1,8 +1,9 @@
 # Nunchucks
 
 ## Recon
-
 ```
+# nmap -Pn --open -sC -sV 10.10.11.122
+
 PORT    STATE SERVICE  VERSION
 22/tcp  open  ssh      OpenSSH 8.2p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
 | ssh-hostkey: 
@@ -24,5 +25,4 @@ PORT    STATE SERVICE  VERSION
 | tls-nextprotoneg: 
 |_  http/1.1
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
-
 ```
