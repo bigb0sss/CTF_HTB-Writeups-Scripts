@@ -1,4 +1,4 @@
-# Nunchucks
+# Nunchucks (Easy - Linux)
 
 ## Recon
 ```console
