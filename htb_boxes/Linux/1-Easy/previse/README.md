@@ -130,5 +130,5 @@ Adding Burp's Match and Replace rule:
 Response header | 302 Found | 200 OK
 ```
 
-![image](/screenshot/01.png)
+![image](./screenshot/01.png)
 
