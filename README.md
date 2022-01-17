@@ -26,6 +26,7 @@
 | Valentine | Easy | [Read](https://bigb0sss.github.io/posts/htb-valentine-writeup/) | OpenSSL, Heartbleed, Tmux |
 | Bounty | Easy | [Read](https://bigb0sss.github.io/posts/htb-bounty-writeup/) | Web.config RCE, Juicy Potato |
 | Frolic | Easy | [Read](https://bigb0sss.github.io/posts/htb-frolic-writeup/) | Frackzip, playSMS RCE, ret2libc |
+| Previse | Easy | [Read](https://github.com/bigb0sss/CTF_HTB-Writeups-Scripts/blob/master/htb_boxes/Linux/1-Easy/previse/README.md) | PHP EAR Vulnerability, Command Injection, Path Injection Prevesc |
 
 ### challenges
 | Web Challenge | Difficulty | |
