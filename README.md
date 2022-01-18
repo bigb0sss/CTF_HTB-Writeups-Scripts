@@ -27,6 +27,7 @@
 | Bounty | Easy | [Read](https://bigb0sss.github.io/posts/htb-bounty-writeup/) | Web.config RCE, Juicy Potato |
 | Frolic | Easy | [Read](https://bigb0sss.github.io/posts/htb-frolic-writeup/) | Frackzip, playSMS RCE, ret2libc |
 | Previse | Easy | [Read](https://github.com/bigb0sss/CTF_HTB-Writeups-Scripts/blob/master/htb_boxes/Linux/1-Easy/previse/README.md) | PHP EAR Vulnerability, Command Injection, Path Injection Prevesc |
+| Love | Easy | [Read](https://github.com/bigb0sss/CTF_HTB-Writeups-Scripts/tree/master/htb_boxes/Windows/1-Easy/love) | SSRF, Voting System 1.0 RCE (Authenticated Upload Arbitrary FIle), AlwaysInstallElevated Registry Key Privesc |
 
 ### challenges
 | Web Challenge | Difficulty | |
